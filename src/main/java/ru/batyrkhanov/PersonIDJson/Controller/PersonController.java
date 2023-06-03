@@ -1,6 +1,5 @@
 package ru.batyrkhanov.PersonIDJson.Controller;
 
-import jakarta.transaction.Status;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +9,8 @@ import ru.batyrkhanov.PersonIDJson.Model.GenericClass;
 import ru.batyrkhanov.PersonIDJson.Model.ListOfDocument;
 
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -18,21 +19,37 @@ import java.util.List;
 public class PersonController {
 
     @PostMapping
-    public GenericClass personIIN(@RequestBody Example example) {
+    public ListOfDocument personIIN(@RequestBody Example example) {
         List<ListOfDocument> listDoc = example.getDocuments().getListOfDocuments();
-        for (ListOfDocument d : listDoc) {
-            if (d.getType().getNameRu().equals("УДОСТОВЕРЕНИЕ РК")) {
-                if (d.getStatus().getNameRu().equals("ДОКУМЕНТ ДЕЙСТВИТЕЛЕН")) {
-                    return d.getType();
-                }}}
+        ListOfDocument udv = null;
+        ListOfDocument pas = null;
 
-        for(ListOfDocument d : listDoc) {
-            if (d.getType().getNameRu().equals("ПАСПОРТ РК")) {
-                if (d.getStatus().getNameRu().equals("ДОКУМЕНТ ДЕЙСТВИТЕЛЕН")) {
-                    return d.getType();
+
+        for (ListOfDocument d : listDoc) {
+            if (d.getStatus().getNameRu().equals("ДОКУМЕНТ ДЕЙСТВИТЕЛЕН")) {
+                if (d.getType().getNameRu().equals("УДОСТОВЕРЕНИЕ РК")) {
+                    if (udv == null) {
+                        udv = d;
+                    } if (d.getEndDate().after(udv.getEndDate())) {
+                        udv = d;
+                    }
+                } if (pas == null) {
+                   pas = d;
+                } if (d.getEndDate().after(pas.getEndDate())) {
+                    pas = d;
                 }
             }
         }
-        return new GenericClass();
+
+
+        if (udv == null && pas == null) {
+            return new ListOfDocument();
+        }
+
+        if (udv == null) {
+            return pas;
+        }
+        return udv;
+
     }
 }

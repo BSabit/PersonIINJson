@@ -2,6 +2,8 @@ package ru.batyrkhanov.PersonIDJson.Model;
 
 import com.fasterxml.jackson.annotation.*;
 
+import java.util.Date;
+
 
 public class ListOfDocument {
 
@@ -10,7 +12,7 @@ public class ListOfDocument {
     @JsonProperty("birthDate")
     private String birthDate;
     @JsonProperty("endDate")
-    private String endDate;
+    private Date endDate;
     @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("issueOrganization")
@@ -53,11 +55,11 @@ public class ListOfDocument {
     }
 
     @JsonProperty("endDate")
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -123,4 +125,6 @@ public class ListOfDocument {
     public void setType(GenericClass type) {
         this.type = type;
     }
+
+
 }
