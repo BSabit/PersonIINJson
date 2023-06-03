@@ -1,5 +1,6 @@
 package ru.batyrkhanov.PersonIDJson.Controller;
 
+import jakarta.transaction.Status;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +20,19 @@ public class PersonController {
     @PostMapping
     public GenericClass personIIN(@RequestBody Example example) {
         List<ListOfDocument> listDoc = example.getDocuments().getListOfDocuments();
-        GenericClass notDocument = null;
         for (ListOfDocument d : listDoc) {
             if (d.getType().getNameRu().equals("УДОСТОВЕРЕНИЕ РК")) {
-                notDocument = d.getStatus();
                 if (d.getStatus().getNameRu().equals("ДОКУМЕНТ ДЕЙСТВИТЕЛЕН")) {
-                    return d.getStatus();
+                    return d.getType();
+                }}}
+
+        for(ListOfDocument d : listDoc) {
+            if (d.getType().getNameRu().equals("ПАСПОРТ РК")) {
+                if (d.getStatus().getNameRu().equals("ДОКУМЕНТ ДЕЙСТВИТЕЛЕН")) {
+                    return d.getType();
                 }
             }
         }
-        return notDocument;
+        return new GenericClass();
     }
 }
