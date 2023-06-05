@@ -58,11 +58,16 @@ public class PersonController {
     }
 
     @PostMapping("/{id}")
-    public ExampleDTO personDTO(@PathVariable("id") String iin) throws JsonProcessingException {
+    public ExampleDTO personDTO(@PathVariable("id") String iin) {
 
         String user = db(iin);
         ObjectMapper mapper = new ObjectMapper();
-        ExampleModel example = mapper.readValue(user, ExampleModel.class);
+        ExampleModel example = null;
+        try {
+            example = mapper.readValue(user, ExampleModel.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
 //         MapperClass mapper = new MapperClass();
 //         return mapper.modelToDTO(example);
