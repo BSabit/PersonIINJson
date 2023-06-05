@@ -2,7 +2,7 @@ package ru.batyrkhanov.PersonIDJson.Model;
 
 import com.fasterxml.jackson.annotation.*;
 
-public class Example {
+public class ExampleModel {
 
     @JsonProperty("birthDate")
     private String birthDate;
@@ -34,7 +34,6 @@ public class Example {
     private RegAddress regAddress;
     @JsonProperty("surname")
     private String surname;
-
 
 
 

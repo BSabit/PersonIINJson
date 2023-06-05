@@ -19,7 +19,7 @@ public class RegAddress {
 
 
     @JsonProperty("flat")
-    private Object flat;
+    private String flat;
     @JsonProperty("invalidity")
     private GenericClass invalidity;
 
@@ -85,13 +85,15 @@ public class RegAddress {
 
 
     @JsonProperty("flat")
-    public Object getFlat() {
+    public String getFlat() {
         return flat;
     }
 
-    public void setFlat(Object flat) {
+    public void setFlat(String flat) {
         this.flat = flat;
     }
+
+
 
 
     @JsonProperty("invalidity")
