@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 import ru.batyrkhanov.PersonIDJson.Dto.ExampleDTO;
 
-import ru.batyrkhanov.PersonIDJson.Mapper.MapperExample;
+import ru.batyrkhanov.PersonIDJson.Dto.Mapper.MapperExample;
 import ru.batyrkhanov.PersonIDJson.Model.*;
 
 

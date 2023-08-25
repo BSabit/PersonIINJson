@@ -1,9 +1,9 @@
-package ru.batyrkhanov.PersonIDJson.Mapper;
+package ru.batyrkhanov.PersonIDJson.Dto.Mapper;
 
-import org.mapstruct.Mapper;
+import org.mapstruct.MapperConfig;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-import ru.batyrkhanov.PersonIDJson.Controller.PersonController;
 import ru.batyrkhanov.PersonIDJson.Dto.ExampleDTO;
 import ru.batyrkhanov.PersonIDJson.Model.*;
 import ru.batyrkhanov.PersonIDJson.annatation.*;
@@ -11,7 +11,8 @@ import ru.batyrkhanov.PersonIDJson.annatation.*;
 import java.util.Date;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
+@MapperConfig(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MapperExample {
 
     MapperExample INSTANCE = Mappers.getMapper(MapperExample.class);
